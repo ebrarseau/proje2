@@ -1,11 +1,11 @@
 from Insan import Insan
 class Calisan(Insan):
-    def __init__(self, tc_no, ad, soyad, yas, cinsiyet, uyruk, sektor, tecrube, maas, yeni_maas):
+    def __init__(self, tc_no, ad, soyad, yas, cinsiyet, uyruk, sektor, tecrube, maas):
         super().__init__(tc_no, ad, soyad, yas, cinsiyet, uyruk)
         self.__sektor = sektor
         self.__tecrube = tecrube
         self.__maas = maas
-        self.__yeni_maas = yeni_maas
+        
 
     def get_sektor(self):
         return self.__sektor
@@ -26,20 +26,23 @@ class Calisan(Insan):
         return self.__yeni_maas
     def set_yeni_maas(self, yeni_maas):
         self.__yeni_maas = yeni_maas
-
+##commitliler yukarda
     def zam_hakki(self):
-        yeni_maas = 0
-        if self._tecrube >= 2 and self.tecrube <= 4 and self._maas < 15000:
-            zam_orani = self._maas % self._tecrube
-            self._yeni_maas += (zam_orani * self.maas / 100) + self._maas
-        elif self._tecrube > 4 and self._maas < 25000:
-            zam_orani = (self._maas % self._tecrube) / 2
-            self._yeni_maas += (zam_orani * self.maas / 100) + self._maas
-        else:
-            zam_orani = 0
-            self._yeni_maas = self._maas
+        try:
+            yeni_maas = 0
+            if self.__tecrube >= 2 and self.tecrube <= 4 and self.__maas < 15000:
+                zam_orani = self.__maas % self.__tecrube
+                self.__yeni_maas += (zam_orani * self.maas / 100) + self.__maas
+            elif self.__tecrube > 4 and self.__maas < 25000:
+                zam_orani = (self.__maas % self.__tecrube) / 2
+                self.__yeni_maas += (zam_orani * self.maas / 100) + self.__maas
+            else:
+                zam_orani = 0
+                self.__yeni_maas = self.__maas
+        except Exception as e:
+            print("Hata oluştu:", str(e))
 
     def _str_(self):
         self.zam_hakki()
-        return f"{super()._str()}, Tecrübe: {self.tecrube}, Yeni Maaş: {self._yeni_maas}"
+        return f"{super().__str__()}, Tecrübe: {self.tecrube}, Yeni Maaş: {self.__yeni_maas}"
 
