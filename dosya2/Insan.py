@@ -43,5 +43,5 @@ class Insan:
     def set_uyruk(self, uyruk):
         self.__uyruk = uyruk
 
-    def _str_(self):
+    def __str__(self):
         return f"Ad: {self.__ad}, Soyad: {self.__soyad}"

@@ -1,11 +1,11 @@
 from Insan import Insan
 class Calisan(Insan):
-    def __init__(self, tc_no, ad, soyad, yas, cinsiyet, uyruk, sektor, tecrube, maas):
+    def __init__(self, tc_no, ad, soyad, yas, cinsiyet, uyruk, sektor, tecrube, maas, yeni_maas):
         super().__init__(tc_no, ad, soyad, yas, cinsiyet, uyruk)
         self.__sektor = sektor
         self.__tecrube = tecrube
         self.__maas = maas
-        
+        self.__yeni_maas = yeni_maas
 
     def get_sektor(self):
         return self.__sektor
@@ -30,19 +30,18 @@ class Calisan(Insan):
     def zam_hakki(self):
         try:
             yeni_maas = 0
-            if self.__tecrube >= 2 and self.tecrube <= 4 and self.__maas < 15000:
+            if self.__tecrube >= 2 and self.__tecrube <= 4 and self.__maas < 15000:
                 zam_orani = self.__maas % self.__tecrube
-                self.__yeni_maas += (zam_orani * self.maas / 100) + self.__maas
+                self.__yeni_maas += (zam_orani * self.__maas / 100) + self.__maas
             elif self.__tecrube > 4 and self.__maas < 25000:
                 zam_orani = (self.__maas % self.__tecrube) / 2
-                self.__yeni_maas += (zam_orani * self.maas / 100) + self.__maas
+                self.__yeni_maas += (zam_orani * self.__maas / 100) + self.__maas
             else:
                 zam_orani = 0
                 self.__yeni_maas = self.__maas
         except Exception as e:
             print("Hata oluştu:", str(e))
 
-    def _str_(self):
+    def __str__(self):
         self.zam_hakki()
-        return f"{super().__str__()}, Tecrübe: {self.tecrube}, Yeni Maaş: {self.__yeni_maas}"
-
+        return f"{super().__str__()}, Tecrübe: {self.__tecrube}, Yeni Maaş: {self.__yeni_maas}"
